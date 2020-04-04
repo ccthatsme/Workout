@@ -9,6 +9,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.Locale;
@@ -17,7 +19,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class StopwatchFragment extends Fragment {
+public class StopwatchFragment extends Fragment implements View.OnClickListener {
 
     private int seconds = 0;
     private  boolean running;
@@ -47,6 +49,12 @@ public class StopwatchFragment extends Fragment {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_stopwatch, container, false);
         runTimer(layout);
+        Button startButton = (Button) layout.findViewById(R.id.start_button);
+        startButton.setOnClickListener(this);
+        Button stopButton = (Button) layout.findViewById(R.id.stop_button);
+        stopButton.setOnClickListener(this);
+        Button resetButton = (Button) layout.findViewById(R.id.reset_button);
+        resetButton.setOnClickListener(this);
         return layout;
     }
 
@@ -77,19 +85,19 @@ public class StopwatchFragment extends Fragment {
     }
 
     //start the stopwatch running when the start button is clicked
-    public void onClickStart(View view)
+    private void onClickStart()
     {
         running = true;
     }
 
     //stop the stopwatch running when the stop button is clicked
-    public void onClickStop(View view)
+    private void onClickStop()
     {
         running = false;
     }
 
     //reset the stopwatch
-    public void onClickReset(View view)
+    private void onClickReset()
     {
         running = false;
         seconds = 0;
@@ -116,5 +124,18 @@ public class StopwatchFragment extends Fragment {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.start_button:
+                onClickStart();
+                break;
+            case R.id.stop_button:
+                onClickStop();
+                break;
+            case R.id.reset_button:
+                break;
+        }
+    }
 }
 
