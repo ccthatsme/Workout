@@ -134,6 +134,7 @@ public class StopwatchFragment extends Fragment implements View.OnClickListener 
                 onClickStop();
                 break;
             case R.id.reset_button:
+                onClickReset();
                 break;
         }
     }
